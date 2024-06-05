@@ -132,15 +132,8 @@
         <footer class="footer text-center">
             <div class="container">
                 <div class="row">
-                    <!-- Footer Location-->
-                    <div class="col-lg-4 mb-5 mb-lg-0">
-                        <h4 class="text-uppercase mb-4">Location</h4>
-                        <p class="lead mb-0">
-                            Cincinnati, OH 45219
-                        </p>
-                    </div>
                     <!-- Footer Social Icons-->
-                    <div class="col-lg-4 mb-5 mb-lg-0">
+                    <div class="col-lg-4 mb-5 mb-lg-0 mx-auto text-center">
                         <h4 class="text-uppercase mb-4">Find Me Around the Web</h4>
                         <a class="btn btn-outline-light btn-social mx-1" href="https://www.linkedin.com/in/bradley-didier/"><i class="fab fa-fw fa-linkedin-in"></i></a>
                         <a class="btn btn-outline-light btn-social mx-1" href="https://github.com/Deegee13244"><i class="fab fa-fw fa-github"></i></a>
@@ -272,6 +265,48 @@
                 </div>
             </div>
         </div>
+
+        <script>
+        // Function to set or retrieve the value of a cookie
+        function setCookie(name, value, days) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+    
+        function getCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(";");
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) === " ") c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0)
+                  return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+    
+        function displayWelcomeMessage() {
+            var lastVisit = getCookie("lastVisit");
+            if (!lastVisit) {
+                setCookie("lastVisit", new Date().toISOString(), 30); // Set cookie to expire in 30 days
+                alert("Welcome to my homepage for the first time!");
+              } else {
+                // Returning visit
+                var lastVisitDate = new Date(lastVisit);
+                alert(
+                  "Welcome back! Your last visit was " +
+                    lastVisitDate.toLocaleString()
+                );
+                setCookie("lastVisit", new Date().toISOString(), 30);
+            }
+        }
+        window.onload = displayWelcomeMessage;
+        </script>
 
         <!-- API Integration - Grabs Joke from Jokeapi -->
         <script>
